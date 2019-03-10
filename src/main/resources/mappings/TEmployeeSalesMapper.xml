@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.southwind.community.api.dao.TEmployeeSalesMapper" >
+  <resultMap id="BaseResultMap" type="com.southwind.community.api.pojo.TEmployeeSales" >
+    <id column="es_id" property="esId" jdbcType="INTEGER" />
+    <result column="e_id" property="eId" jdbcType="INTEGER" />
+    <result column="ws_id" property="wsId" jdbcType="INTEGER" />
+    <result column="es_number" property="esNumber" jdbcType="INTEGER" />
+    <result column="es_number_ratio" property="esNumberRatio" jdbcType="DECIMAL" />
+    <result column="es_amount" property="esAmount" jdbcType="DECIMAL" />
+    <result column="es_amount_ratio" property="esAmountRatio" jdbcType="DECIMAL" />
+    <result column="es_date" property="esDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <trim prefix="where" prefixOverrides="and|or" >
+      <if test="condition.eId != null" >
+         and e_id = #{condition.eId,jdbcType=INTEGER}
+      </if>
+      <if test="condition.wsId != null" >
+         and ws_id = #{condition.wsId,jdbcType=INTEGER}
+      </if>
+      <if test="condition.esNumber != null" >
+         and es_number = #{condition.esNumber,jdbcType=INTEGER}
+      </if>
+      <if test="condition.esNumberRatio != null" >
+         and es_number_ratio = #{condition.esNumberRatio,jdbcType=DECIMAL}
+      </if>
+      <if test="condition.esAmount != null" >
+         and es_amount = #{condition.esAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="condition.esAmountRatio != null" >
+         and es_amount_ratio = #{condition.esAmountRatio,jdbcType=DECIMAL}
+      </if>
+      <if test="condition.esDate != null" >
+         and es_date = #{condition.esDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="condition.createDate != null" >
+         and create_date = #{condition.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="condition.updateDate != null" >
+         and update_date = #{condition.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="condition.createUser != null" >
+         and create_user = #{condition.createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.updateUser != null" >
+         and update_user = #{condition.updateUser,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.startTime != null" >
+         and es_date &gt;= #{condition.startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="condition.endTime != null" >
+         and es_date &lt;= #{condition.endTime,jdbcType=TIMESTAMP}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <trim prefix="where" prefixOverrides="and|or" >
+      <if test="example.condition.eId != null" >
+         and e_id = #{example.condition.eId,jdbcType=INTEGER}
+      </if>
+      <if test="example.condition.wsId != null" >
+         and ws_id = #{example.condition.wsId,jdbcType=INTEGER}
+      </if>
+      <if test="example.condition.esNumber != null" >
+         and es_number = #{example.condition.esNumber,jdbcType=INTEGER}
+      </if>
+      <if test="example.condition.esNumberRatio != null" >
+         and es_number_ratio = #{example.condition.esNumberRatio,jdbcType=DECIMAL}
+      </if>
+      <if test="example.condition.esAmount != null" >
+         and es_amount = #{example.condition.esAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="example.condition.esAmountRatio != null" >
+         and es_amount_ratio = #{example.condition.esAmountRatio,jdbcType=DECIMAL}
+      </if>
+      <if test="example.condition.esDate != null" >
+         and es_date = #{example.condition.esDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.condition.createDate != null" >
+         and create_date = #{example.condition.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.condition.updateDate != null" >
+         and update_date = #{example.condition.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.condition.createUser != null" >
+         and create_user = #{example.condition.createUser,jdbcType=VARCHAR}
+      </if>
+      <if test="example.condition.updateUser != null" >
+         and update_user = #{example.condition.updateUser,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Column_List" >
+    es_id, e_id, ws_id, es_number, es_number_ratio, es_amount, es_amount_ratio, es_date, 
+    create_date, update_date, create_user, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.southwind.community.api.pojo.Criteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_employee_sales
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="common.Mysql_Pagination_Limit" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_employee_sales
+    where es_id = #{esId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_employee_sales
+    where es_id = #{esId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.southwind.community.api.pojo.Criteria" >
+    delete from t_employee_sales
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.southwind.community.api.pojo.TEmployeeSales" >
+    insert into t_employee_sales (es_id, e_id, ws_id, 
+      es_number, es_number_ratio, es_amount, 
+      es_amount_ratio, es_date, create_date, 
+      update_date, create_user, update_user
+      )
+    values (#{esId,jdbcType=INTEGER}, #{eId,jdbcType=INTEGER}, #{wsId,jdbcType=INTEGER}, 
+      #{esNumber,jdbcType=INTEGER}, #{esNumberRatio,jdbcType=DECIMAL}, #{esAmount,jdbcType=DECIMAL}, 
+      #{esAmountRatio,jdbcType=DECIMAL}, #{esDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.southwind.community.api.pojo.TEmployeeSales" >
+    insert into t_employee_sales
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="esId != null" >
+        es_id,
+      </if>
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="wsId != null" >
+        ws_id,
+      </if>
+      <if test="esNumber != null" >
+        es_number,
+      </if>
+      <if test="esNumberRatio != null" >
+        es_number_ratio,
+      </if>
+      <if test="esAmount != null" >
+        es_amount,
+      </if>
+      <if test="esAmountRatio != null" >
+        es_amount_ratio,
+      </if>
+      <if test="esDate != null" >
+        es_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="esId != null" >
+        #{esId,jdbcType=INTEGER},
+      </if>
+      <if test="eId != null" >
+        #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="wsId != null" >
+        #{wsId,jdbcType=INTEGER},
+      </if>
+      <if test="esNumber != null" >
+        #{esNumber,jdbcType=INTEGER},
+      </if>
+      <if test="esNumberRatio != null" >
+        #{esNumberRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="esAmount != null" >
+        #{esAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="esAmountRatio != null" >
+        #{esAmountRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="esDate != null" >
+        #{esDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.southwind.community.api.pojo.Criteria" resultType="java.lang.Integer" >
+    select count(*) from t_employee_sales
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_employee_sales
+    <set >
+      <if test="record.esId != null" >
+        es_id = #{record.esId,jdbcType=INTEGER},
+      </if>
+      <if test="record.eId != null" >
+        e_id = #{record.eId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wsId != null" >
+        ws_id = #{record.wsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.esNumber != null" >
+        es_number = #{record.esNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.esNumberRatio != null" >
+        es_number_ratio = #{record.esNumberRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.esAmount != null" >
+        es_amount = #{record.esAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.esAmountRatio != null" >
+        es_amount_ratio = #{record.esAmountRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="record.esDate != null" >
+        es_date = #{record.esDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_employee_sales
+    set es_id = #{record.esId,jdbcType=INTEGER},
+      e_id = #{record.eId,jdbcType=INTEGER},
+      ws_id = #{record.wsId,jdbcType=INTEGER},
+      es_number = #{record.esNumber,jdbcType=INTEGER},
+      es_number_ratio = #{record.esNumberRatio,jdbcType=DECIMAL},
+      es_amount = #{record.esAmount,jdbcType=DECIMAL},
+      es_amount_ratio = #{record.esAmountRatio,jdbcType=DECIMAL},
+      es_date = #{record.esDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.southwind.community.api.pojo.TEmployeeSales" >
+    update t_employee_sales
+    <set >
+      <if test="eId != null" >
+        e_id = #{eId,jdbcType=INTEGER},
+      </if>
+      <if test="wsId != null" >
+        ws_id = #{wsId,jdbcType=INTEGER},
+      </if>
+      <if test="esNumber != null" >
+        es_number = #{esNumber,jdbcType=INTEGER},
+      </if>
+      <if test="esNumberRatio != null" >
+        es_number_ratio = #{esNumberRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="esAmount != null" >
+        es_amount = #{esAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="esAmountRatio != null" >
+        es_amount_ratio = #{esAmountRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="esDate != null" >
+        es_date = #{esDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where es_id = #{esId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.southwind.community.api.pojo.TEmployeeSales" >
+    update t_employee_sales
+    set e_id = #{eId,jdbcType=INTEGER},
+      ws_id = #{wsId,jdbcType=INTEGER},
+      es_number = #{esNumber,jdbcType=INTEGER},
+      es_number_ratio = #{esNumberRatio,jdbcType=DECIMAL},
+      es_amount = #{esAmount,jdbcType=DECIMAL},
+      es_amount_ratio = #{esAmountRatio,jdbcType=DECIMAL},
+      es_date = #{esDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR}
+    where es_id = #{esId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
+	<!-- <logger name="org.hibernate.type.descriptor.sql.BasicBinder"
+		level="TRACE" />
+	<logger name="org.hibernate.type.descriptor.sql.BasicExtractor"
+		level="DEBUG" />
+	<logger name="org.hibernate.SQL" level="DEBUG" />
+	<logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
+	<logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" /> -->
+
+	
+	<!-- mybatis日志打印-->
+	<logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="java.sql" level="DEBUG" />
+    
+    <!--  项目 mapper 路径
+            console控制台显示sql语句：STDOUT.filter.level -> debug级别
+    -->
+    <logger level="DEBUG" name="pers.scsun.steinway.dao"></logger>
+	
+	<springProfile name="test">
+	    <appender name="STBRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <File>/home/test/steinway.log</File>
+	        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	            <FileNamePattern>/home/test/steinway.%d{yyyy-MM-dd}.log</FileNamePattern>
+	            <maxHistory>10</maxHistory> 
+	        </rollingPolicy>
+	        <encoder>
+				<Pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+				<charset>UTF-8</charset> <!-- 此处设置字符集 -->  
+	        </encoder>
+	    </appender>
+	    <root level="INFO">
+        	<appender-ref ref="CONSOLE" />
+            <appender-ref ref="STBRollingFileAppender" />
+        </root>
+    </springProfile>
+    
+    <springProfile name="uat">
+	    <appender name="STBRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <File>/home/uat/steinway.log</File>
+	        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	            <FileNamePattern>/home/uat/steinway.%d{yyyy-MM-dd}.log</FileNamePattern>
+	        </rollingPolicy>
+	        <encoder>
+				<Pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+				<charset>UTF-8</charset> <!-- 此处设置字符集  --> 
+	        </encoder>
+	    </appender>
+	    <root level="INFO">
+        	<appender-ref ref="CONSOLE" />
+            <appender-ref ref="STBRollingFileAppender" />
+        </root>
+    </springProfile>
+    
+    <springProfile name="prod">
+	    <appender name="STBRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <File>/home/prod/steinway.log</File>
+	        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	            <FileNamePattern>/home/prod/steinway.%d{yyyy-MM-dd}.log</FileNamePattern>
+	        </rollingPolicy>
+	        <encoder>
+				<Pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+				<charset>UTF-8</charset> <!-- 此处设置字符集   -->
+	        </encoder>
+	    </appender>
+	    
+	    <root level="INFO">
+        	<appender-ref ref="CONSOLE" />
+            <appender-ref ref="STBRollingFileAppender" />
+        </root>
+    </springProfile> 
+    
+	<!--日志异步到数据库 -->
+	<!-- <appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+		日志异步到数据库
+		<connectionSource
+			class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+			连接池
+			<dataSource class="com.mchange.v2.c3p0.ComboPooledDataSource">
+				<driverClass>com.mysql.jdbc.Driver</driverClass>
+				<url>jdbc:mysql://127.0.0.1:3306/databaseName</url>
+				<user>root</user>
+				<password>root</password>
+			</dataSource>
+		</connectionSource>
+	</appender> -->
+</configuration>
